@@ -1,0 +1,17 @@
+{
+    "name": "adsUnify-srv",
+    "dependencies": {
+        "@sap-cloud-sdk/openapi-generator": "^3.4.0",
+        "@sap/xsenv": "latest",
+        "@sap/xssec": "latest",
+        "base64-stream": "^1.0.0",
+        "base64topdf": "^1.1.8",
+        "express": "latest",
+        "nodemailer": "^6.9.4",
+        "passport": "latest",
+        "pdf-parse": "^1.1.1"
+    },
+    "scripts": {
+        "start": "node server.js"
+    }
+}
