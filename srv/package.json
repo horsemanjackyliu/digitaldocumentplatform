@@ -2,6 +2,7 @@
     "name": "adsUnify-srv",
     "dependencies": {
         "@sap-cloud-sdk/openapi-generator": "^3.4.0",
+        "@sap-cloud-sdk/resilience": "^3.4.0",
         "@sap/xsenv": "latest",
         "@sap/xssec": "latest",
         "base64-stream": "^1.0.0",

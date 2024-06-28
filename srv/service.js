@@ -1,5 +1,6 @@
 const {ADSRenderRequestApi} = require('./external/CF_ADSRestAPI/CF_ADSRestAPI/ads-render-request-api');
 const {ADSSetRequestsApi} = require('./external/CF_ADSRestAPI/CF_ADSRestAPI/ads-set-requests-api');
+const {retry,circuitBreaker,timeout,resilience} = require('@sap-cloud-sdk/resilience');
 // const { StoreFormsApi } = require('./external/CF_ADSRestAPI/CF_ADSRestAPI/store-forms-api');
 const {DocumentsApi} = require('./external/PrintAPI/PRINTAPI/documents-api');
 const {PrintTasksApi} = require('./external/PrintAPI/PRINTAPI/print-tasks-api');
@@ -14,6 +15,12 @@ const emailuser = 'email@outlook.com';              //  Sending email
 const emailpassword ='email password'                            //Sending email password 
 // const dmsPath = 'adobeservice';
 
+const defaultResilienceOptions = {
+    retry: 5,
+    timeout: 3000,
+    circuitBreaker: true
+};
+
 
 
 
@@ -21,17 +28,16 @@ exports.ServiceApi = {
    render: (body) =>{
      const fn = new Promise((resolve, reject) =>{
         let queryP =  { templateSource: 'storageName', TraceLevel: 1 }
-        ADSRenderRequestApi.renderingPdfPost(body,queryP).execute({destinationName: adsdetination }).then(pdf=>{
+        ADSRenderRequestApi.renderingPdfPost(body,queryP).middleware(resilience(defaultResilienceOptions)).execute({destinationName: adsdetination }).then(pdf=>{
 
             resolve(pdf.fileContent); 
         }).catch(err=>{
-            reject(err);
+            reject(err);    
         })
      });
         return fn;
    },
    sign: (body) =>{
-
     const fn = new Promise((resolve, reject) =>{
         let queryP = { TraceLevel: 1 };
         ADSSetRequestsApi.pDfSetSignaturePost(body,queryP).execute({destinationName: adsdetination}).then(spdf=>{
