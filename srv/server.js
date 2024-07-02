@@ -10,11 +10,12 @@ xsenv.loadEnv();
 const services = xsenv.getServices({
     uaa: { label: 'xsuaa' }
 });
-
+// const JWTStrategy = require('@sap/xssec');
 const xssec = require('@sap/xssec');
 const passport = require('passport');
-// passport.use('JWT', new xssec.JWTStrategy(services.uaa));
-passport.use('JWT', new xssec.XssecPassportStrategy(services.uaa));
+passport.use('JWT', new xssec.JWTStrategy(services.uaa));
+
+// passport.use('JWT', new xssec.XssecPassportStrategy(services.uaa));
 app.use(passport.initialize());
 app.use(passport.authenticate('JWT', {
     session: false

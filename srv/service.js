@@ -11,8 +11,8 @@ const adsdetination = 'ads-rest-api';             //ADS Destinbation
 const printdetination = 'printServiceApi';        // Print Service destination
 const dmsdetination = 'dmsApi';                  // SDM destination
 const dmsRepId ='4c0973e8-a785-4789-a048-067d42f97873';    // SDM Repositary ID
-const emailuser = 'email@outlook.com';              //  Sending email 
-const emailpassword ='email password'                            //Sending email password 
+const emailuser = 'email_address';              //  Sending email 
+const emailpassword ='password'                            //Sending email password 
 // const dmsPath = 'adobeservice';
 
 const defaultResilienceOptions = {
